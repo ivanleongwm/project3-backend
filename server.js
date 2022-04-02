@@ -1,14 +1,12 @@
 require('dotenv').config()
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const HolidayController = require("./controllers/holidayController")
 
 const app = express();
 const PORT = process.env.PORT ?? 2000
 const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/holidays"
-
-var cors = require('cors')
-app.use(cors())
 
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
@@ -25,6 +23,7 @@ mongoose.connection.once("open", () => {
   console.log("connected to mongoose...");
 });
 
+app.use(cors());
 app.use("/api/holidays", HolidayController)
 
 
