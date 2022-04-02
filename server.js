@@ -7,6 +7,9 @@ const app = express();
 const PORT = process.env.PORT ?? 2000
 const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://localhost:27017/holidays"
 
+var cors = require('cors')
+app.use(cors())
+
 // Error / Disconnection
 mongoose.connection.on("error", (err) =>
   console.log(err.message + " is Mongod not running?")
